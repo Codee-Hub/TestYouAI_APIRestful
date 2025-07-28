@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/testyouai_db
-    username: testyouai_user
-    password: testyouai_pass
     driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
