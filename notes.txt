@@ -1,0 +1,3 @@
+Admin123
+
+docker-compose up -d
