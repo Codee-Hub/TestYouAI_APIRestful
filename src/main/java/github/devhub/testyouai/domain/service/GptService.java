@@ -6,11 +6,28 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class GptService {
+
+//    List<Test> lista = new ArrayList<>();
+
+//    @Bean
+//    public CommandLineRunner run(GptService gptService) {
+//        return args -> {
+//            Test questionario = gptService.gerarQuestionario("Spring Boot", 10, "médio");
+//            lista.add(questionario);
+//            System.out.println(questionario);
+//        };
+//    }
+
 
     private final ChatModel chatModel;
     private final ObjectMapper objectMapper;
@@ -25,26 +42,41 @@ public class GptService {
      */
     public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade) {
         String promptText = String.format("""
-            Gere um questionário em JSON com as seguintes características:
-            - Tema: %s
-            - Número de perguntas: %d
-            - Dificuldade: %s
+    Gere um questionário em JSON com as seguintes características:
+    - Tema: %s
+    - Número de perguntas: %d
+    - Dificuldade: %s
 
-            Formato de retorno:
+    Estrutura do JSON:
+    {
+      "dificuldade": "string",
+      "numeroDePerguntas": int,
+      "perguntasList": [
+        {
+          "textQuestion": "string",
+          "option": [
             {
-              "dificuldade": "string",
-              "numeroDePerguntas": int,
-              "perguntasList": [
-                {
-                  "text": "Texto da pergunta",
-                  "justification": "Justificativa da resposta",
-                  "isCorrect": true
-                }
-              ]
-            }
+              "textOption": "Texto da alternativa",
+              "justification": "Justificativa da resposta",
+              "isCorrect": true
+            },
+            {
+              "text": "...",
+              "justification": "...",
+              "isCorrect": false
+            },
+            ...
+          ]
+        }
+      ]
+    }
 
-            Apenas retorne o JSON. Não adicione explicações nem formatações extras.
-            """, tema, numeroDePerguntas, dificuldade);
+    - Cada pergunta deve ter exatamente 5 alternativas (answers).
+    - Apenas uma alternativa deve ter "isCorrect": true.
+    - O JSON deve ser válido e compatível com o padrão acima.
+    - Retorne **somente** o JSON, sem explicações ou formatação adicional.
+    """, tema, numeroDePerguntas, dificuldade);
+
 
         try {
             var response = chatModel.call(new Prompt(promptText, OpenAiChatOptions.builder()
@@ -52,7 +84,8 @@ public class GptService {
                     .temperature(0.7)
                     .build()));
 
-            String json = response.getResult().getOutput().toString();
+            String rawText  = response.getResult().getOutput().getText();
+            String json = extractJson(rawText); // remove blocos de código
 
             return objectMapper.readValue(json, Test.class);
 
@@ -60,4 +93,12 @@ public class GptService {
             throw new RuntimeException("Erro ao gerar questionário com GPT: " + e.getMessage(), e);
         }
     }
+
+    private String extractJson(String text) {
+        if (text.startsWith("```")) {
+            return text.replaceAll("(?s)```(?:json)?", "").trim();
+        }
+        return text.trim();
+    }
+
 }
