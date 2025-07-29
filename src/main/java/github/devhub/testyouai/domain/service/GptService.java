@@ -50,11 +50,11 @@ public class GptService {
     Estrutura do JSON:
     {
       "dificuldade": "string",
-      "numeroDePerguntas": int,
-      "perguntasList": [
+      "numberOfQuestions": int,
+      "questionList": [
         {
           "textQuestion": "string",
-          "option": [
+          "optionList": [
             {
               "textOption": "Texto da alternativa",
               "justification": "Justificativa da resposta",

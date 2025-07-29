@@ -12,5 +12,5 @@ import java.util.List;
 public class Question {
     private String textQuestion;
     private Boolean wasAnswered = false;
-    private List<Option> option;
+    private List<Option> optionList;
 }

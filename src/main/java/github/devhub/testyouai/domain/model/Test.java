@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Test {
     private String dificuldade;
-    private Integer numeroDePerguntas;
-    private List<Question> perguntasList;
+    private Integer numberOfQuestions;
+    private List<Question> questionList;
 }
