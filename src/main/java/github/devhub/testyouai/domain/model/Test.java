@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Test {
-    private String dificuldade;
-    private Integer numeroDePerguntas;
-    private List<Question> perguntasList;
+    private String level;
+    private Integer numberOfQuestions;
+    private List<Question> questionList;
 }
