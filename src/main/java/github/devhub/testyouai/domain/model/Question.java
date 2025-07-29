@@ -11,5 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Question {
     private String textQuestion;
+    private Boolean wasAnswered = false;
     private List<Option> option;
 }

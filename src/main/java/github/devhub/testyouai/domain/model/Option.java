@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class Option {
     private String textOption;
     private String justification;
+    private Boolean wasSelect = false;
     private Boolean isCorrect;
 }

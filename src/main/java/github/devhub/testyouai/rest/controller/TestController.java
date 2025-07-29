@@ -18,13 +18,13 @@ public class TestController {
     private final List<Test> lista = new ArrayList<>();
 
     @GetMapping
-    public List<Test> gerarEListarTests(
+    public Test gerarEListarTests(
             @RequestParam String tema,
             @RequestParam int numeroDePerguntas,
             @RequestParam String dificuldade
     ) {
         Test questionario = gptService.gerarQuestionario(tema, numeroDePerguntas, dificuldade);
         lista.add(questionario);
-        return lista;
+        return questionario;
     }
 }
