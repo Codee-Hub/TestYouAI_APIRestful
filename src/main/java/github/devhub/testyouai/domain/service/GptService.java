@@ -49,7 +49,7 @@ public class GptService {
 
     Estrutura do JSON:
     {
-      "dificuldade": "string",
+      "level": "string",
       "numberOfQuestions": int,
       "questionList": [
         {
