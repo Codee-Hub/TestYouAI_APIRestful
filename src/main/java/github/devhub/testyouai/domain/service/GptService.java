@@ -49,6 +49,7 @@ public class GptService {
 
     Estrutura do JSON:
     {
+      "theme":"string",
       "level": "string",
       "numberOfQuestions": int,
       "questionList": [

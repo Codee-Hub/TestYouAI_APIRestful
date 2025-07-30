@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Test {
+    private String theme;
     private String level;
     private Integer numberOfQuestions;
     private List<Question> questionList;
