@@ -15,16 +15,13 @@ import java.util.List;
 public class TestController {
 
     private final GptService gptService;
-    private final List<Test> lista = new ArrayList<>();
 
     @GetMapping
-    public Test gerarEListarTests(
+    public Test getTest(
             @RequestParam String tema,
             @RequestParam int numeroDePerguntas,
             @RequestParam String dificuldade
     ) {
-        Test questionario = gptService.gerarQuestionario(tema, numeroDePerguntas, dificuldade);
-        lista.add(questionario);
-        return questionario;
+        return gptService.gerarQuestionario(tema, numeroDePerguntas, dificuldade);
     }
 }
