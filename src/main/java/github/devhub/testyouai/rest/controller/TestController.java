@@ -18,10 +18,10 @@ public class TestController {
 
     @GetMapping
     public Test getTest(
-            @RequestParam String tema,
-            @RequestParam int numeroDePerguntas,
-            @RequestParam String dificuldade
+            @RequestParam String theme,
+            @RequestParam int numberOfQuestions,
+            @RequestParam String level
     ) {
-        return gptService.gerarQuestionario(tema, numeroDePerguntas, dificuldade);
+        return gptService.gerarQuestionario(theme, numberOfQuestions, level);
     }
 }
