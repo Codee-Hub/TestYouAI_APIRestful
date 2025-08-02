@@ -14,4 +14,6 @@ public class Test {
     private String level;
     private Integer numberOfQuestions;
     private List<Question> questionList;
+
+    private User user;
 }
