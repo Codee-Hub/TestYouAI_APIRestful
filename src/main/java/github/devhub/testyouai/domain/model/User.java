@@ -5,12 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "user_app")
 public class User {
 
     @Id
@@ -25,7 +24,7 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
+/*
     @OneToMany(mappedBy = "id")
-    private List<Test> testList;
+    private List<Test> testList;*/
 }
