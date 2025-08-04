@@ -52,6 +52,7 @@ public class GptService {
       "theme":"string",
       "level": "string",
       "numberOfQuestions": int,
+      "wasAnswered": false,
       "questionList": [
         {
           "textQuestion": "string",

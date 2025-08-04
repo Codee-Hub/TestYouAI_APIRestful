@@ -20,9 +20,6 @@ public class Question {
     @Column(name = "text_question")
     private String textQuestion;
 
-    @Column(name = "was_answered")
-    private Boolean wasAnswered = false;
-
     @OneToMany(mappedBy = "id")
     private List<Option> optionList;
 

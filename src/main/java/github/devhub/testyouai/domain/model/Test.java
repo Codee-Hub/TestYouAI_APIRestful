@@ -24,6 +24,9 @@ public class Test {
     @Column(name = "number_of_questions")
     private Integer numberOfQuestions;
 
+    @Column(name = "was_answered")
+    private Boolean wasAnswered = false;
+
     @Column(name = "question_list")
     @OneToMany(mappedBy = "id")
     private List<Question> questionList;
