@@ -1,4 +1,4 @@
-package github.devhub.testyouai.rest.exception;
+package github.devhub.testyouai.exception;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

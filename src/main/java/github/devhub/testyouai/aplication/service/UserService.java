@@ -1,7 +1,7 @@
-package github.devhub.testyouai.domain.service;
+package github.devhub.testyouai.aplication.service;
 
 import github.devhub.testyouai.domain.model.User;
-import github.devhub.testyouai.domain.repository.UserRepository;
+import github.devhub.testyouai.adapter.out.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package github.devhub.testyouai.domain.service;
+package github.devhub.testyouai.aplication.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import github.devhub.testyouai.domain.model.Test;

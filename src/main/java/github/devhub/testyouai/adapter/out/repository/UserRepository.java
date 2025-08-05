@@ -1,4 +1,4 @@
-package github.devhub.testyouai.domain.repository;
+package github.devhub.testyouai.adapter.out.repository;
 
 import github.devhub.testyouai.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
