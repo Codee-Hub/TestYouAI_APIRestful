@@ -1,5 +1,6 @@
 package github.devhub.testyouai.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Option {
     @Column(name = "is_correct")
     private Boolean isCorrect;
 
+    @JsonIgnore
     @ManyToOne
     private Question question;
 }
