@@ -15,10 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-
-    //saveUser
     //findByEmail
-    //findbyPhone
 
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
@@ -35,6 +32,10 @@ public class UserService {
     public User updateUser(Long id, User userUpdated) {
         userUpdated.setId(id);
         return userRepository.save(userUpdated);
+    }
+
+    public User saveUser(Long id, User usuario) {
+        return userRepository.save(usuario);
     }
 
     public User findByEmail(String email) {

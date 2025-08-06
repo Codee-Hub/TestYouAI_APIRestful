@@ -17,18 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GptService {
 
-//    List<Test> lista = new ArrayList<>();
-
-//    @Bean
-//    public CommandLineRunner run(GptService gptService) {
-//        return args -> {
-//            Test questionario = gptService.gerarQuestionario("Spring Boot", 10, "médio");
-//            lista.add(questionario);
-//            System.out.println(questionario);
-//        };
-//    }
-
-
     private final ChatModel chatModel;
     private final ObjectMapper objectMapper;
 
