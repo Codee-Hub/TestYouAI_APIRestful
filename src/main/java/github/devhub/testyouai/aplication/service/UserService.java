@@ -29,13 +29,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateUser(Long id, User userUpdated) {
+    public void updateUser(Long id, User userUpdated) {
         userUpdated.setId(id);
-        return userRepository.save(userUpdated);
+        userRepository.save(userUpdated);
     }
 
-    public User saveUser(Long id, User usuario) {
-        return userRepository.save(usuario);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     public User findByEmail(String email) {

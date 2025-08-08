@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotBlank;
 
 @Data
 public class UserRequestDTO {
-
     @NotNull
     @NotBlank
     private String name;

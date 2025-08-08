@@ -6,12 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatOptions;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +25,7 @@ public class GptService {
      */
     public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade) {
         String promptText = String.format("""
-    Gere um questionário em JSON com as seguintes características:
-    - Tema: %s
-    - Número de perguntas: %d
-    - Dificuldade: %s
-
+   
     Estrutura do JSON:
     {
       "theme":"string",
@@ -61,10 +52,6 @@ public class GptService {
       ]
     }
 
-    - Cada pergunta deve ter exatamente 5 alternativas (answers).
-    - Apenas uma alternativa deve ter "isCorrect": true.
-    - O JSON deve ser válido e compatível com o padrão acima.
-    - Retorne **somente** o JSON, sem explicações ou formatação adicional.
     """, tema, numeroDePerguntas, dificuldade);
 
 
@@ -75,6 +62,7 @@ public class GptService {
                     .build()));
 
             String rawText  = response.getResult().getOutput().getText();
+            assert rawText != null;
             String json = extractJson(rawText); // remove blocos de código
 
             return objectMapper.readValue(json, Test.class);
