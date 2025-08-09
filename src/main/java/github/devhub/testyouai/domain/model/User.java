@@ -1,9 +1,12 @@
 package github.devhub.testyouai.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,11 +23,12 @@ public class User {
 
     private String password;
 
-    private String nome;
+    private String name;
 
     @Column(name = "phone_number")
     private String phoneNumber;
-/*
+
+
     @OneToMany(mappedBy = "id")
-    private List<Test> testList;*/
+    private List<Test> testList;
 }

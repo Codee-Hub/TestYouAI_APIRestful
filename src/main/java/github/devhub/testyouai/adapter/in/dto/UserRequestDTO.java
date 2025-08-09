@@ -1,13 +1,19 @@
 package github.devhub.testyouai.adapter.in.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
+
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRequestDTO {
     @NotNull
     @NotBlank
@@ -17,4 +23,9 @@ public class UserRequestDTO {
     @NotNull
     @NotBlank
     private String email;
+
+    private String password;
+
+    private String phoneNumber;
 }
+

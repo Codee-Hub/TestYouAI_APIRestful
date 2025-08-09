@@ -32,7 +32,6 @@ public class Test {
     @OneToMany(mappedBy = "id")
     private List<Question> questionList;
 
-    @JsonIgnore
     @ManyToOne
     private User user;
 }

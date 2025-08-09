@@ -3,6 +3,7 @@ package github.devhub.testyouai.aplication.service;
 import github.devhub.testyouai.domain.model.User;
 import github.devhub.testyouai.adapter.out.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     //findByEmail
 
@@ -35,11 +38,12 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        user.setPassword( passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).get();
     }
 
 }
