@@ -23,6 +23,6 @@ spring:
 
   ai:
     openai:
-      api-key:
+      api-key: ${OPENAI_API_KEY}
       chat:
         model: gpt-4-turbo
