@@ -23,6 +23,6 @@ spring:
 
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY}
+      api-key: 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
       chat:
         model: gpt-4-turbo
