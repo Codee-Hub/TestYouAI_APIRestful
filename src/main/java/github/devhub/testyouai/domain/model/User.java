@@ -28,7 +28,6 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-
     @OneToMany(mappedBy = "id")
     private List<Test> testList;
 }
