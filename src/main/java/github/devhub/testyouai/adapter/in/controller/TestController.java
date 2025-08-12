@@ -1,10 +1,10 @@
 package github.devhub.testyouai.adapter.in.controller;
 
+import github.devhub.testyouai.adapter.in.dto.TestResponseBasicDTO;
+import github.devhub.testyouai.adapter.in.mapper.TestBasicMapper;
 import github.devhub.testyouai.aplication.service.TestService;
 import github.devhub.testyouai.domain.model.Test;
 import github.devhub.testyouai.aplication.service.GptService;
-import github.devhub.testyouai.domain.model.User;
-import github.devhub.testyouai.exception.UserNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,14 +13,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/tests")
+@RequestMapping("tests")
 @RequiredArgsConstructor
 @Tag(name = "Test Controller", description = "Geração de questionários com GPT")
 public class TestController {
 
     private final GptService gptService;
     private final TestService testService;
+    private final TestBasicMapper testBasicMapper;
 
     @GetMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
@@ -36,7 +39,19 @@ public class TestController {
     @GetMapping("/{id}")
     @Operation(summary = "Busca um test pelo ID")
     public ResponseEntity<Test> getTestById(@PathVariable @NotNull Long id) {
-        Test test = testService.findById(id).get();
+        Test test = testService.findById(id).orElse(null);
+        TestResponseBasicDTO testResponseBasicDTO = testBasicMapper.toDTO(test);
         return ResponseEntity.ok(test);
+    }
+
+    @GetMapping("/users/{id}")
+    @Operation(summary = "Busca um test pelo ID do usuario")
+    public ResponseEntity<List<TestResponseBasicDTO>> getTestByUserId(@PathVariable @NotNull Long id) {
+        List<TestResponseBasicDTO> testResponseBasicDTOList = testService.findByUserId(id)
+                .stream()
+                .map(testBasicMapper::toDTO)
+                .toList();
+
+        return ResponseEntity.ok(testResponseBasicDTOList);
     }
 }

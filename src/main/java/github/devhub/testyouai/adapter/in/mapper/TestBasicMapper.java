@@ -9,14 +9,15 @@ import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring", uses = UserMapper.class)
-public abstract class TestResponseBasicMapper {
+public abstract class TestBasicMapper {
 
     @Autowired
     UserService userService;
 
     public abstract TestResponseBasicDTO toDTO(Test test);
 
-    @Mapping(target = "user", expression = "java(userService.findById(testRequestBasicDTO.idUser()))" )
+    @Mapping(target = "userApp", expression = "java(userService.findById(testRequestBasicDTO.idUser()).get())" )
+    @Mapping(target = "questionList", ignore = true) // provavelmente vai ser preenchido depois
     public abstract Test toEntity(TestRequestBasicDTO testRequestBasicDTO);
 }
 

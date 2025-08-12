@@ -18,7 +18,7 @@ public class TestService {
         return testRepository.findById(id);
     }
 
-    public Optional<Test> findByUserId(Long userId){
-        return testRepository.findByUserId(userId);
+    public List<Test> findByUserId(Long userId){
+        return testRepository.findByUserAppId(userId);
     }
 }

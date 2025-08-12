@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,5 +32,61 @@ public class Test {
     private List<Question> questionList;
 
     @ManyToOne
-    private User user;
+    private UserApp userApp;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public Integer getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(Integer numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
+    }
+
+    public Boolean getWasAnswered() {
+        return wasAnswered;
+    }
+
+    public void setWasAnswered(Boolean wasAnswered) {
+        this.wasAnswered = wasAnswered;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
+    }
+
+    public UserApp getUserApp() {
+        return userApp;
+    }
+
+    public void setUserApp(UserApp userApp) {
+        this.userApp = userApp;
+    }
 }

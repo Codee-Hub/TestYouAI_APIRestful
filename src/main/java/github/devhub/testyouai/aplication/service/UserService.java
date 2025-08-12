@@ -1,6 +1,6 @@
 package github.devhub.testyouai.aplication.service;
 
-import github.devhub.testyouai.domain.model.User;
+import github.devhub.testyouai.domain.model.UserApp;
 import github.devhub.testyouai.adapter.out.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,11 +20,11 @@ public class UserService {
 
     //findByEmail
 
-    public Optional<User> findById(Long id) {
+    public Optional<UserApp> findById(Long id) {
         return userRepository.findById(id);
     }
 
-    public List<User> findAll() {
+    public List<UserApp> findAll() {
         return Collections.unmodifiableList(userRepository.findAll());
     }
 
@@ -32,17 +32,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void updateUser(Long id, User userUpdated) {
-        userUpdated.setId(id);
-        userRepository.save(userUpdated);
+    public void updateUser(Long id, UserApp userAppUpdated) {
+        userAppUpdated.setId(id);
+        userRepository.save(userAppUpdated);
     }
 
-    public User saveUser(User user) {
-        user.setPassword( passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public UserApp saveUser(UserApp userApp) {
+        userApp.setPassword( passwordEncoder.encode(userApp.getPassword()));
+        return userRepository.save(userApp);
     }
 
-    public User findByEmail(String email) {
+    public UserApp findByEmail(String email) {
         return userRepository.findByEmail(email).get();
     }
 

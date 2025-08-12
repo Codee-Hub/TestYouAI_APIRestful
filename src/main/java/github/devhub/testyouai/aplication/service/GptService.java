@@ -8,7 +8,7 @@ import github.devhub.testyouai.adapter.out.repository.UserRepository;
 import github.devhub.testyouai.domain.model.Option;
 import github.devhub.testyouai.domain.model.Question;
 import github.devhub.testyouai.domain.model.Test;
-import github.devhub.testyouai.domain.model.User;
+import github.devhub.testyouai.domain.model.UserApp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -92,11 +92,11 @@ public class GptService {
                 return test;
 
             if(userRepository.existsById(idUser)){
-                User user = userRepository.findById(idUser).get();
-                user.getTestList().add(test);
-                test.setUser(user);
+                UserApp userApp = userRepository.findById(idUser).get();
+                userApp.getTestList().add(test);
+                test.setUserApp(userApp);
                 testRepository.save(test);
-                userRepository.save(user);
+                userRepository.save(userApp);
                 for(Question questao : test.getQuestionList()){
                     questionRepository.save(questao);
                     for(Option option : questao.getOptionList()){

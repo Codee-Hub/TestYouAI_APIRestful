@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "user_app")
-public class User {
+public class UserApp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +28,7 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id")
     private List<Test> testList;
 }
