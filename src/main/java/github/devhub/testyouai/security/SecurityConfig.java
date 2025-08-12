@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,10 +40,11 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html/**"
                         ).permitAll()
-                        .requestMatchers("/user/**").hasRole("ADMIN")
+//                        .requestMatchers("/user/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll() // cria usuário sem login
                         .requestMatchers("/api/tests/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()); // Para HTML, troque por .formLogin
 
