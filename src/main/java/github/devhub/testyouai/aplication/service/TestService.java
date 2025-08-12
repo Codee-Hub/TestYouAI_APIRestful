@@ -5,6 +5,7 @@ import github.devhub.testyouai.domain.model.Test;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -15,5 +16,9 @@ public class TestService {
 
     public Optional<Test> findById(Long id){
         return testRepository.findById(id);
+    }
+
+    public Optional<Test> findByUserId(Long userId){
+        return testRepository.findByUserId(userId);
     }
 }

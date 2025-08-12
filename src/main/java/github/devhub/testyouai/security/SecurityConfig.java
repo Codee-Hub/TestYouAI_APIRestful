@@ -41,7 +41,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html/**"
                         ).permitAll()
 //                        .requestMatchers("/user/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll() // cria usuário sem login
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers("/api/tests/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
