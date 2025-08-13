@@ -13,7 +13,7 @@ public record TestResponseDTO(
 
         Boolean wasAnswered,
 
-        UserRequestDTO user,
+        UserResponseDTO userApp,
 
         List<QuestionResponseDTO> questionList
 ) {
