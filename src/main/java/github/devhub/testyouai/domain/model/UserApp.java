@@ -29,6 +29,6 @@ public class UserApp {
     private String phoneNumber;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "userApp")
     private List<Test> testList;
 }

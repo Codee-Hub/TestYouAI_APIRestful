@@ -24,7 +24,5 @@ public class UserResponseDTO {
     private String password;
 
     private String phoneNumber;
-
-    private TestResponseBasicDTO testResponseBasicDTO;
 }
 

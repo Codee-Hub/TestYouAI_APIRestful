@@ -1,7 +1,9 @@
 package github.devhub.testyouai.adapter.in.controller;
 
 import github.devhub.testyouai.adapter.in.dto.TestResponseBasicDTO;
+import github.devhub.testyouai.adapter.in.dto.TestResponseDTO;
 import github.devhub.testyouai.adapter.in.mapper.TestBasicMapper;
+import github.devhub.testyouai.adapter.in.mapper.TestMapper;
 import github.devhub.testyouai.aplication.service.TestService;
 import github.devhub.testyouai.domain.model.Test;
 import github.devhub.testyouai.aplication.service.GptService;
@@ -23,7 +25,8 @@ public class TestController {
 
     private final GptService gptService;
     private final TestService testService;
-    private final TestBasicMapper testBasicMapper;
+    private final TestMapper testMapper;
+    private TestBasicMapper testBasicMapper;
 
     @GetMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
@@ -38,10 +41,10 @@ public class TestController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca um test pelo ID")
-    public ResponseEntity<Test> getTestById(@PathVariable @NotNull Long id) {
+    public ResponseEntity<TestResponseDTO> getTestById(@PathVariable @NotNull Long id) {
         Test test = testService.findById(id).orElse(null);
-        TestResponseBasicDTO testResponseBasicDTO = testBasicMapper.toDTO(test);
-        return ResponseEntity.ok(test);
+        TestResponseDTO testResponseBasicDTO = testMapper.toDTO(test);
+        return ResponseEntity.ok(testResponseBasicDTO);
     }
 
     @GetMapping("/users/{id}")

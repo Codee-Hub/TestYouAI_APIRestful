@@ -28,7 +28,7 @@ public class Test {
     private Boolean wasAnswered = false;
 
     @Column(name = "question_list")
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "test")
     private List<Question> questionList;
 
     @ManyToOne

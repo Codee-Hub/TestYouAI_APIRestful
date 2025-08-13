@@ -10,8 +10,6 @@ public record QuestionResponseDTO(
 
         String textQuestion,
 
-        List<OptionResponseDTO> optionList,
-
-        TestResponseBasicDTO test
+        List<OptionResponseDTO> optionList
 ) {
 }

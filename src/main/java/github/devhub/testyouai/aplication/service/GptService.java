@@ -98,8 +98,10 @@ public class GptService {
                 testRepository.save(test);
                 userRepository.save(userApp);
                 for(Question questao : test.getQuestionList()){
+                    questao.setTest(test);
                     questionRepository.save(questao);
                     for(Option option : questao.getOptionList()){
+                        option.setQuestion(questao);
                         optionRepository.save(option);
                     }
                 }

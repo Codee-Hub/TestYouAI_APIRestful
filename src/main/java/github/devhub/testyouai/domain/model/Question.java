@@ -20,7 +20,7 @@ public class Question {
     @Column(name = "text_question")
     private String textQuestion;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "question")
     private List<Option> optionList;
 
     @JsonIgnore

@@ -13,8 +13,6 @@ public record OptionResponseDTO(
 
          Boolean wasSelect,
 
-         Boolean isCorrect,
-
-         QuestionResponseDTO question
+         Boolean isCorrect
 ) {
 }
