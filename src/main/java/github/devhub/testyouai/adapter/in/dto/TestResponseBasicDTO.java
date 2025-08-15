@@ -11,6 +11,6 @@ public record TestResponseBasicDTO(
 
          Boolean wasAnswered,
 
-         UserRequestDTO user
+         UserResponseDTO userApp
 ) {
 }
