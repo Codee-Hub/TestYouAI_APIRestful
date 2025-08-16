@@ -26,7 +26,7 @@ public class TestController {
     private final GptService gptService;
     private final TestService testService;
     private final TestMapper testMapper;
-    private TestBasicMapper testBasicMapper;
+    private final TestBasicMapper testBasicMapper;
 
     @GetMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
