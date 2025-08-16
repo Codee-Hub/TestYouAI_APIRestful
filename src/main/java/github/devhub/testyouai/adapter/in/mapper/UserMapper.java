@@ -10,16 +10,6 @@ public interface UserMapper {
 
     UserResponseDTO toDTO(UserApp userApp);
 
-    default UserApp toEntity(UserRequestDTO dto) {
-        if (dto == null) {
-            return null;
-        }
+    UserApp toEntity(UserRequestDTO userRequestDTO);
 
-        UserApp userApp = new UserApp();
-        userApp.setName(dto.getName());
-        userApp.setEmail(dto.getEmail());
-        userApp.setPassword(dto.getPassword());
-        userApp.setPhoneNumber(dto.getPhoneNumber());
-        return userApp;
-    }
 }
