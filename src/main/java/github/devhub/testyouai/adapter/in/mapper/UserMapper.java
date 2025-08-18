@@ -11,5 +11,4 @@ public interface UserMapper {
     UserResponseDTO toDTO(UserApp userApp);
 
     UserApp toEntity(UserRequestDTO userRequestDTO);
-
 }
