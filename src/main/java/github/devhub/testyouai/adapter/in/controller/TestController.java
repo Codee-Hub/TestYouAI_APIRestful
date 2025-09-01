@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("tests")
+@RequestMapping("/tests")
 @RequiredArgsConstructor
 @Tag(name = "Test Controller", description = "Geração de questionários com GPT")
 public class TestController {
