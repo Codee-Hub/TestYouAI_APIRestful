@@ -2,6 +2,7 @@ package github.devhub.testyouai.security;
 
 import github.devhub.testyouai.adapter.out.repository.RoleRepository;
 import github.devhub.testyouai.adapter.out.repository.UserRepository;
+import github.devhub.testyouai.domain.model.Role;
 import github.devhub.testyouai.domain.model.UserApp;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class AdminUserConfig implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
-//        var roleAdmin = roleRepository.findByName(Role.Values.ADMIN.name());
+        var roleAdmin = roleRepository.findByName(Role.Values.ADMIN.name().toLowerCase());
 
         var userAdmin = userRepository.findByName("admin");
 
@@ -42,9 +43,9 @@ public class AdminUserConfig implements CommandLineRunner {
                     var user = new UserApp();
                     user.setName("admin");
                     user.setPassword(passwordEncoder.encode("123"));
-                    user.setEmail("admin@test.com");
+                    user.setEmail("admin@teste.com");
                     user.setPhoneNumber("123123123123123");
-//                    user.setRoles(Set.of(roleAdmin));
+                    user.setRoles(Set.of(roleAdmin));
                     userRepository.save(user);
                 }
         );

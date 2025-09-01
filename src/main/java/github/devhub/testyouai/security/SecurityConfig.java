@@ -65,8 +65,8 @@ import java.security.interfaces.RSAPublicKey;
 //    }
 
 @Configuration
-@EnableWebSecurity
-@EnableMethodSecurity
+@EnableWebSecurity //rotas
+@EnableMethodSecurity // scopes nas controllers
 public class SecurityConfig {
 
     @Value("${jwt.public.key}")

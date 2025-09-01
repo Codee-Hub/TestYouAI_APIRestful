@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +29,7 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "Lista todos os usuários")
+    @PreAuthorize("hasAuthority('SCOPE_admin')")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         List<UserResponseDTO> userList = userService.findAll().stream().map(userMapper::toDTO).toList();
         return ResponseEntity.ok(userList);

@@ -3,6 +3,7 @@ package github.devhub.testyouai.adapter.in.controller;
 import github.devhub.testyouai.adapter.in.dto.LoginRequest;
 import github.devhub.testyouai.adapter.in.dto.LoginResponse;
 import github.devhub.testyouai.adapter.out.repository.UserRepository;
+import github.devhub.testyouai.domain.model.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,17 +45,17 @@ public class TokenController {
         var now = Instant.now();
         var expiresIn = 300L;
 
-//        var scopes = user.get().getRoles()
-//                .stream()
-//                .map(Role::getName)
-//                .collect(Collectors.joining(" "));
+        var scopes = user.get().getRoles()
+                .stream()
+                .map(Role::getName)
+                .collect(Collectors.joining(" "));
 
         var claims = JwtClaimsSet.builder()
                 .issuer("mybackend")
                 .subject(user.get().getId().toString())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
-//                .claim("scope", scopes)
+                .claim("scope", scopes)
                 .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
