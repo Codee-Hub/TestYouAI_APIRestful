@@ -1,6 +1,17 @@
+jwt:
+  public:
+    key: classpath:app.pub
+  private:
+    key: classpath:app.key
+
+
 spring:
   application:
     name: TestYouAi
+
+  sql:
+    init:
+      mode: always
 
   datasource:
     driver-class-name: org.h2.Driver
@@ -26,3 +37,4 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         model: gpt-4-turbo
+
