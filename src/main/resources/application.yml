@@ -8,10 +8,10 @@ jwt:
 spring:
   application:
     name: TestYouAi
-
-  sql:
-    init:
-      mode: always
+#
+#  sql:
+#    init:
+#      mode: always
 
   datasource:
     driver-class-name: org.h2.Driver
