@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class TestController {
 
     @PostMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
-    public Test getTest(@RequestBody @Valid TestParametersDTO parameters) {
-        return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), parameters.tokenJwt());
+    public Test getTest(@RequestBody @Valid TestParametersDTO parameters, JwtAuthenticationToken tokenJwt) {
+        return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), tokenJwt);
     }
 
     @GetMapping("/{id}")

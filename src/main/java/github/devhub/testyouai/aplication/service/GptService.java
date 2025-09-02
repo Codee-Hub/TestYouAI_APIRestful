@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +35,7 @@ public class GptService {
      * @param dificuldade Nível de dificuldade (ex: "fácil", "médio", "difícil")
      * @return objeto Test com as perguntas
      */
-    public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade, Long idUser) {
+    public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade, JwtAuthenticationToken tokenJWT) {
         String promptText = String.format("""
             Você é um gerador de questionários. Gere um JSON com o seguinte formato abaixo, preenchendo os dados com base nos parâmetros:
             
@@ -88,11 +89,13 @@ public class GptService {
 
             Test test = objectMapper.readValue(json, Test.class);
 
-            if(idUser == null)
+            if(tokenJWT == null)
                 return test;
 
-            if(userRepository.existsById(idUser)){
-                UserApp userApp = userRepository.findById(idUser).get();
+            UserApp userApp = userRepository.findById(Long.valueOf(tokenJWT.getName())).orElse(null);
+
+
+            if(userApp != null){
                 userApp.getTestList().add(test);
                 test.setUserApp(userApp);
                 testRepository.save(test);
