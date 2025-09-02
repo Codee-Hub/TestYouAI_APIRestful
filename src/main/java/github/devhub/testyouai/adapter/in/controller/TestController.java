@@ -1,5 +1,6 @@
 package github.devhub.testyouai.adapter.in.controller;
 
+import github.devhub.testyouai.adapter.in.dto.TestParametersDTO;
 import github.devhub.testyouai.adapter.in.dto.TestResponseBasicDTO;
 import github.devhub.testyouai.adapter.in.dto.TestResponseDTO;
 import github.devhub.testyouai.adapter.in.mapper.TestBasicMapper;
@@ -10,6 +11,7 @@ import github.devhub.testyouai.aplication.service.GptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +30,10 @@ public class TestController {
     private final TestMapper testMapper;
     private final TestBasicMapper testBasicMapper;
 
-    @GetMapping
+    @PostMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
-    public Test getTest(
-            @Parameter(description = "Tema do questionário") @RequestParam String theme,
-            @Parameter(description = "Número de perguntas") @RequestParam int numberOfQuestions,
-            @Parameter(description = "Nível de dificuldade") @RequestParam String level,
-            @Parameter(description = "Id do usuário (opcional)") @RequestParam(required = false) Long idUser
-    ) {
-        return gptService.gerarQuestionario(theme, numberOfQuestions, level, idUser);
+    public Test getTest(@RequestBody @Valid TestParametersDTO parameters) {
+        return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), parameters.tokenJwt());
     }
 
     @GetMapping("/{id}")
