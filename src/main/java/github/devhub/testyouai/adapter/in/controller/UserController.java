@@ -72,6 +72,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Remove um usuário pelo ID")
+    @PreAuthorize("hasAuthority('SCOPE_admin')")
     public ResponseEntity<Void> deleteUserByID(@PathVariable @NotNull Long id) {
         try {
             userService.removeById(id);

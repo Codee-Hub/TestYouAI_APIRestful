@@ -35,7 +35,7 @@ public class GptService {
      * @param dificuldade Nível de dificuldade (ex: "fácil", "médio", "difícil")
      * @return objeto Test com as perguntas
      */
-    public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade, JwtAuthenticationToken tokenJWT) {
+    public Test gerarQuestionario(String tema, int numeroDePerguntas, String dificuldade, Long userID) {
         String promptText = String.format("""
             Você é um gerador de questionários. Gere um JSON com o seguinte formato abaixo, preenchendo os dados com base nos parâmetros:
             
@@ -89,10 +89,10 @@ public class GptService {
 
             Test test = objectMapper.readValue(json, Test.class);
 
-            if(tokenJWT == null)
+            if(userID == null)
                 return test;
 
-            UserApp userApp = userRepository.findById(Long.valueOf(tokenJWT.getName())).orElse(null);
+            UserApp userApp = userRepository.findById(userID).orElse(null);
 
 
             if(userApp != null){

@@ -34,7 +34,7 @@ public class TestController {
     @PostMapping
     @Operation(summary = "Gera um questionário com base no tema, número de perguntas e nível")
     public Test getTest(@RequestBody @Valid TestParametersDTO parameters, JwtAuthenticationToken tokenJwt) {
-        return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), tokenJwt);
+        return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), Long.valueOf(tokenJwt.getName()));
     }
 
     @GetMapping("/{id}")
@@ -45,10 +45,10 @@ public class TestController {
         return ResponseEntity.ok(testResponseBasicDTO);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users")
     @Operation(summary = "Busca um test pelo ID do usuario")
-    public ResponseEntity<List<TestResponseBasicDTO>> getTestByUserId(@PathVariable @NotNull Long id) {
-        List<TestResponseBasicDTO> testResponseBasicDTOList = testService.findByUserId(id)
+    public ResponseEntity<List<TestResponseBasicDTO>> getTestByUserId(JwtAuthenticationToken tokenJwt) {
+        List<TestResponseBasicDTO> testResponseBasicDTOList = testService.findByUserId(Long.valueOf(tokenJwt.getName()))
                 .stream()
                 .map(testBasicMapper::toDTO)
                 .toList();
