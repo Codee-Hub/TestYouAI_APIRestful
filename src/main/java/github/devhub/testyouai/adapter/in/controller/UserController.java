@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,14 +61,10 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um usuário existente")
-    public ResponseEntity<UserApp> updateUser(@PathVariable @NotNull Long id, @RequestBody @Valid UserRequestDTO userUpdatedDTO) {
-        try {
+    public ResponseEntity<UserApp> updateUser(@PathVariable @NotNull Long id, @RequestBody @Valid UserRequestDTO userUpdatedDTO, JwtAuthenticationToken token) {
             UserApp userAppUpdated = userMapper.toEntity(userUpdatedDTO);
-            userService.updateUser(id, userAppUpdated);
+            userService.updateUser(id, userAppUpdated, token);
             return ResponseEntity.ok().body(userAppUpdated);
-        } catch (UserNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
     }
 
     @DeleteMapping("/{id}")
