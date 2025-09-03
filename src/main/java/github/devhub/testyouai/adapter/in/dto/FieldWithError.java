@@ -1,6 +1,6 @@
 package github.devhub.testyouai.adapter.in.dto;
 
-public record FieldError(
+public record FieldWithError(
         String field,
         String message
 ) {

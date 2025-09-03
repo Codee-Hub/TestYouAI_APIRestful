@@ -1,18 +1,29 @@
 package github.devhub.testyouai.exception;
 
+import github.devhub.testyouai.adapter.in.dto.Error;
+import github.devhub.testyouai.adapter.in.dto.FieldWithError;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error: " + ex.getMessage());
+    public ResponseEntity<Error> erroValidacao(MethodArgumentNotValidException e){
+        List<FieldError> fieldErrors = e.getFieldErrors();
+        List<FieldWithError> erroCampos = fieldErrors
+                .stream()
+                .map(fe -> new FieldWithError(fe.getField(), fe.getDefaultMessage()))
+                .toList();
+        Error erro = new Error(400, "Erro na validação dos campo" , erroCampos);
+        return ResponseEntity.badRequest().body(erro);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
