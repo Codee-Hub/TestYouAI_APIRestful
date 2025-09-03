@@ -1,6 +1,10 @@
 package github.devhub.testyouai.adapter.in.dto;
 
-public record Error(
+import java.util.List;
 
+public record Error(
+        String status,
+        String message,
+        List<FieldError> fieldErrors
 ) {
 }
