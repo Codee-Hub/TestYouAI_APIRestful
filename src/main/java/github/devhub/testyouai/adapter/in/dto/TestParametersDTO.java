@@ -10,6 +10,7 @@ public record TestParametersDTO(
         @Min(1)
         int numberOfQuestions,
         @NotBlank
-        String level
+        String level,
+        Long userId
 ) {
 }
