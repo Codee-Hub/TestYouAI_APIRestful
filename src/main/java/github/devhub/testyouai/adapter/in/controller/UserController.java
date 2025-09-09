@@ -61,10 +61,11 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um usuário existente")
-    public ResponseEntity<UserApp> updateUser(@PathVariable @NotNull Long id, @RequestBody @Valid UserRequestDTO userUpdatedDTO, JwtAuthenticationToken token) {
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable @NotNull Long id, @RequestBody @Valid UserRequestDTO userUpdatedDTO, JwtAuthenticationToken token) {
             UserApp userAppUpdated = userMapper.toEntity(userUpdatedDTO);
             userService.updateUser(id, userAppUpdated, token);
-            return ResponseEntity.ok().body(userAppUpdated);
+            UserResponseDTO userResponseDTO = userMapper.toDTO(userAppUpdated);
+            return ResponseEntity.ok().body(userResponseDTO);
     }
 
     @DeleteMapping("/{id}")
