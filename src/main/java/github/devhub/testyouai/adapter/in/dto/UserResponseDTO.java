@@ -13,5 +13,5 @@ public record UserResponseDTO(
         String email,
         String password,
         String phoneNumber,
-        Set<Role> roles
+        Set<RoleResponseDTO> roles
 ) {}
