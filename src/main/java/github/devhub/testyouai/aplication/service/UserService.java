@@ -44,7 +44,6 @@ public class UserService {
 
         UserApp user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
 
-
         boolean isAdmin = userRepository.findById(Long.valueOf(token.getName())).get().getRoles()
                 .stream()
                 .anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name().toLowerCase()));
@@ -52,6 +51,7 @@ public class UserService {
         if (isAdmin || Objects.equals(user.getId(), Long.valueOf(token.getName()))) {
             userAppUpdated.setId(id);
             userAppUpdated.setPassword( passwordEncoder.encode(userAppUpdated.getPassword()));
+            userAppUpdated.setRoles(user.getRoles());
             userRepository.save(userAppUpdated);
         } else {
             throw new ForbiddenException("O usuário com ID " + Long.valueOf(token.getName()) + " Não tem permissão para excluir outros usuários");
