@@ -50,7 +50,8 @@ public class UserService {
 
         if (isAdmin || Objects.equals(user.getId(), Long.valueOf(token.getName()))) {
             userAppUpdated.setId(id);
-            userAppUpdated.setPassword( passwordEncoder.encode(userAppUpdated.getPassword()));
+//            userAppUpdated.setPassword( passwordEncoder.encode(userAppUpdated.getPassword()));
+            userAppUpdated.setPassword(user.getPassword());
             userAppUpdated.setRoles(user.getRoles());
             userRepository.save(userAppUpdated);
         } else {
