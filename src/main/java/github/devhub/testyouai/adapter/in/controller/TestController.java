@@ -38,6 +38,12 @@ public class TestController {
         return gptService.gerarQuestionario(parameters.theme(), parameters.numberOfQuestions(), parameters.level(), parameters.userId());
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Modificar um questionário")
+    public TestResponseDTO updateTest(@RequestBody TestResponseDTO testResquestDTO, @PathVariable Long id) {
+        return testMapper.toDTO(testService.update(id,testMapper.toEntity(testResquestDTO)));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Busca um test pelo ID")
     public ResponseEntity<TestResponseDTO> getTestById(@PathVariable @NotNull Long id) {

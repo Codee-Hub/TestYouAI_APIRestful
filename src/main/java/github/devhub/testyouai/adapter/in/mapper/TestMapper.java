@@ -14,4 +14,6 @@ public abstract class TestMapper {
 
     public abstract TestResponseDTO toDTO(Test test);
 
+    public abstract Test toEntity(TestResponseDTO testResponseDTO);
+
 }
