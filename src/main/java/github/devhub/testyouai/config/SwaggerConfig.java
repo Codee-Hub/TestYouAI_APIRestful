@@ -14,14 +14,14 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info().title("TestYouAI API").version("v1.0"))
-                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new io.swagger.v3.oas.models.Components()
-                        .addSecuritySchemes("basicAuth", new SecurityScheme()
+                        .addSecuritySchemes("bearerAuth", new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
-                                .scheme("basic")
-                                .description("Autenticação Básica")
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                                .description("Autenticação via JWT Token")
                         )
                 );
     }
 }
-
